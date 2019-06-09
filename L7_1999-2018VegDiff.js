@@ -33,20 +33,20 @@ var L7_2018_SA = L7_2018.filterBounds(StudyArea);
 var  L7_1999_SA_Oct = L7_1999_SA.filterDate('1999-10-01', '1999-10-31');
 var L7_2018_SA_Oct = L7_2018_SA.filterDate('2018-10-01', '2018-10-31');
 //cloud likelihood threshold
-var cloud_thres = 50;
+//var cloud_thres = 50;
 
 //cloud masking function
-var maskclouds = function(image) {
-var cloudscore = ee.Algorithms.Landsat.simpleCloudScore(image);
-var cloudLikeLihood = cloudscore.select('cloud');
-var cloudpixels = cloudLikeLihood.lt(cloud_thres);
-var landsat_SA_15_NC_SS = image.updateMask(cloudpixels);
-return landsat_SA_15_NC_SS;
-}
+//var maskclouds = function(image) {
+//var cloudscore = ee.Algorithms.Landsat.simpleCloudScore(image);
+//var cloudLikeLihood = cloudscore.select('cloud');
+//var cloudpixels = cloudLikeLihood.lt(cloud_thres);
+//var landsat_SA_15_NC_SS = image.updateMask(cloudpixels);
+//return landsat_SA_15_NC_SS;
+//}
 
 //mask clouds from all images
-var L7_1999_NC = L7_1999_SA_Oct.map(maskclouds);
-var L7_2018_NC = L7_2018_SA_Oct.map(maskclouds);
+//var L7_1999_NC = L7_1999_SA_Oct.map(maskclouds);
+//var L7_2018_NC = L7_2018_SA_Oct.map(maskclouds);
 
 //NDVI Function
 var addNDVI = function(image) {
@@ -56,8 +56,8 @@ return landsat_ndvi;
 }
 
 //Add NDVI
-var L7_1999_NC_NDVI = L7_1999_NC.map(addNDVI);
-var L7_2018_NC_NDVI = L7_2018_NC.map(addNDVI);
+var L7_1999_NC_NDVI = L7_1999_SA_Oct.map(addNDVI);
+var L7_2018_NC_NDVI = L7_2018_SA_Oct.map(addNDVI);
 
 //print NDVI Information for both
 print(L7_1999_NC_NDVI);
@@ -82,9 +82,9 @@ var L7_2018_NDVI_C = L7_2018_NDVI.clip(StudyArea);
 var vegdif = L7_2018_NDVI_C.subtract(L7_1999_NDVI_C);
 
 //Map layer
-Map.addlayer (vegdif, NDVI_P, 'NDVI Difference');
+Map.addLayer (vegdif, NDVI_P, 'NDVI Difference');
 Map.addLayer(L7_1999_NDVI_C, NDVI_P, 'Landsat 1999 NDVI');
-Map.addLayer(L7_2018_NDVI_C, NDVI_P, 'Landsat 2018 NDVI')
+Map.addLayer(L7_2018_NDVI_C, NDVI_P, 'Landsat 2018 NDVI');
 Map.centerObject(L7_2018_NDVI_C, 7);
 
 //export image
