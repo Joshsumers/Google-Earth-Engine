@@ -12,11 +12,11 @@ var data2017 = data.filterDate('2017-03-01','2017-03-20');
 var seaSurfaceTemperature01 = data2001.select('sea_surface_temperature');
 var seaSurfaceTemperature17 = data2017.select('sea_surface_temperature');
 
-//condense into just mean temperature for each year
+//condense into just median temperature for each year
 var mediantemp01 = seaSurfaceTemperature01.median();
 var mediantemp17 = seaSurfaceTemperature17.median();
 
-//calculate difference in means
+//calculate difference in medians
 var mediantempdif = mediantemp17.subtract(mediantemp01);
 
 
@@ -30,7 +30,7 @@ var visParams = {
 };
 Map.centerObject(mediantempdif, 1);
 Map.addLayer(mediantempdif, visParams, 'Median Sea Surface temperature difference');
-print(meantempdif);
+print(mediantempdif);
 //export image
 Export.image.toDrive({
 image: mediantempdif,
