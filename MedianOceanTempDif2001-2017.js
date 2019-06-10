@@ -13,7 +13,7 @@ var seaSurfaceTemperature01 = data2001.select('sea_surface_temperature');
 var seaSurfaceTemperature17 = data2017.select('sea_surface_temperature');
 
 //condense into just mean temperature for each year
-var median01 = seaSurfaceTemperature01.median();
+var mediantemp01 = seaSurfaceTemperature01.median();
 var mediantemp17 = seaSurfaceTemperature17.median();
 
 //calculate difference in means
