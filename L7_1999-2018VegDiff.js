@@ -1,7 +1,7 @@
-//Landsat 8 NDVI 1999
+//Landsat 7 NDVI 1999
 //NDVI = (NIR - Red) / (NIR +Red)
-//Red = Landsat8 Band 4
-//NIR = LandSat 8 Band 5
+//Red = Landsat7 Band 3
+//NIR = LandSat 7 Band 4
 
 //Import Landsat8 Imagery
 var L7_1999 = ee.ImageCollection("LANDSAT/LE07/C01/T1_SR");
